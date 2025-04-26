@@ -45,3 +45,14 @@ write_rds(title_ratings, "data/title_ratings_sample.rda")
 title_principals <- preprocess("title_principals_sample")
 write_rds(title_principals, "data/title_principals_sample.rda")
 ```
+
+* Run the function on all of the `*_sample.csv.gz` files to created processed `.rda` files.
+* In your other files, you can load these using the `TABLE <- read_rds("data/FILENAME.rda")` function.
+
+```{r}
+name_basics <- read_rds("data/name_basics_sample.rda")
+title_basics <- read_rds("data/title_basics_sample.rda")
+title_ratings <- read_rds("data/title_ratings_sample.rda")
+title_principals <- read_rds("data/title_principals_sample.rda")
+```
+
