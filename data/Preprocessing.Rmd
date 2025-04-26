@@ -1,0 +1,47 @@
+---
+title: "IMDB Data Preprocessing"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(readr)
+```
+
+## Part I: Preprocessing
+
+* [Edit your `.gitignore` file](https://docs.github.com/en/get-started/getting-started-with-git/ignoring-files) to ignore all files with the `.rda` extension. (Add and commit)
+
+* Create a new file in the `data/` directory called "Preprocessing.Rmd". The remaining instructions in this section are to be completed in that file.
+
+* Write a function that will load a table from the IMDb files in the `data/` directory.
+  * The function should take the file name (without the ".csv.gz" portion) as an argument
+  * The function should load the appropriate `.csv.gz` file.
+  * Make sure that all "\\N" values (which IMDB uses to indicate missing values) are turned into proper NA values in R
+  * The function should return the table.
+
+```{r preprocess-function}
+preprocess <- function(file_name) {
+  file_path <- file.path("data", paste0(file_name, ".csv.gz"))
+  table <- readr::read_csv(file_path, na = "\\N")
+  return(table)
+}
+```
+
+
+* For each of the `.csv.gz` files, use your function to load the table, then save it into a variable (e.g. `name_basics <- preprocess("name_basics")`) and use the `write_rds` function (e.g., `write_rds(name_basics, "name_basics.rda")`.
+
+```{r}
+name_basics <- preprocess("name_basics_sample")
+write_rds(name_basics, "data/name_basics_sample.rda")
+
+title_basics <- preprocess("title_basics_sample")
+write_rds(title_basics, "data/title_basics_sample.rda")
+
+title_ratings <- preprocess("title_ratings_sample")
+write_rds(title_ratings, "data/title_ratings_sample.rda")
+
+title_principals <- preprocess("title_principals_sample")
+write_rds(title_principals, "data/title_principals_sample.rda")
+```
